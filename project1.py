@@ -133,24 +133,33 @@ while True:
         sr = 0
         ans = 0
         tmp = ''
+        check = 1
         for i in s:
-            if i.isdigit():
-                tmp += i
+            if i == '-':
+                check = -1
             else:
-                sr += int(tmp)
-                tmp = ''
+                if i.isdigit():
+                    tmp += i
+                else:
+                    sr += int(tmp) * check
+                    check = 1
+                    tmp = ''
         if len(tmp) != 0:
-            sr += int(tmp)
+            sr += int(tmp) * check
         tmp = ''
         sr /= n
         for i in s:
-            if i.isdigit():
-                tmp += i
+            if i == '-':
+                check = -1
             else:
-                a = int(tmp)
-                tmp = ''
-                if a < sr:
-                    ans += a
+                if i.isdigit():
+                    tmp += i
+                else:
+                    a = int(tmp) * check
+                    check = 1
+                    tmp = ''
+                    if a < sr:
+                        ans += a
         if len(tmp) != 0:
             a = int(tmp)
             tmp = ''
@@ -163,7 +172,7 @@ while True:
         s = input('\nEnter date in format dd.mm.yyyy: ')
         import re
 
-        pattern = r'(\d{2}|\d{1})\.(\d{2}|\d{1})\.16[0-9]{2}'
+        pattern = r'(\d{2}|\d{1})\.(\d{2}|\d{1})\.((160[1-9])|(16[1-9][0-9])|(1700))'
         day, month, year = 0, 0, 0
         check = False
         if not re.fullmatch(pattern, s):
