@@ -82,9 +82,11 @@ while True:
                     except ValueError:
                         print('\nEnter your data again, input must contain only nums')
 
+        print(start, end, step)
         while start <= end:
             import math
 
+            start = round(start, 12)
             print(f'x = {start}\n'
                   f'y = {start ** 3 + 3 * math.log(-(start + 2) / 6) - 2 ** start - math.sqrt(start ** 2 - 3 * start + 17)}')
             start += step
